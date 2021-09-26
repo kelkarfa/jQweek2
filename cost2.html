@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>Generate Total Dinner Cost</h1>
+        <form id="cost_form" name="cost_form" 
+              action="join.html" method="get">
+            <div>
+                <label for="dinner_cost">Dinner cost:
+                </label>
+                <input type="text" id="cost"
+                       name="dinner_cost">
+            </div>
+            
+            <div>
+                <label for="tip">Tip Percentage:</label>
+                <input type="text" id="tip"
+                       name="first_name">
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" id="join_list"
+                       value="Calculate">
+                <input type="button" id="clear_form"
+                       value="Clear form">
+            </div>     
+        </form>
+        <div id="data"></div>
+    </main>
+    <script>
+        const $ = selector => document.querySelector(selector);
+ 
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            $("#join_list").addEventListener("click", evt => {
+                // get values user entered in textboxes
+                const x = $("#cost").value;
+                const y = $("#tip").value;
+                // calculate the total dinner cost
+            
+                const totCost =(x * (y/100) + x);
+            
+                // create an error message and set it to an empty string
+                let errorMessage = "";
+         
+                // check user entries – add to error message if invalid
+                if (x == "") { 
+                    errorMessage += "cost is required.\n";
+                }
+               
+                if (y == "") {
+                    errorMessage += "tip is required.\n";
+                }
+            
+                // prevent form submission if there’s an error message
+                if (errorMessage != "") {         
+                    alert(errorMessage);
+                    evt.preventDefault();
+                } 
+                evt.preventDefault();
+
+                console.log(x);
+                
+                const html = `<p>The total dinner cost is $${totCost}</p>`;
+                
+                document.getElementById("data").innerHTML = html;
+                document.getElementById("cost_form").reset();
+            });
+         
+            $("#clear_form").addEventListener("click", () => {
+                document.getElementById("cost_form").reset();
+            });
+            
+          
+        });
+        
+
+    </script>
+</body>
+</html>

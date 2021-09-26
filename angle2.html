@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>Calculate The Missing Right Triangle Angle</h1>
+        <form id="angle_form" name="angle_form" 
+              action="angle2.html" method="get">
+            <div>
+                <label for="angl1">First Angle:
+                </label>
+                <input type="text" id="angl1"
+                       name="email_1">
+            </div>
+            
+            <div>
+                <label for="angl2">Second Angle:</label>
+                <input type="text" id="angl2"
+                       name="angl2">
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <input type="submit" id="join_list"
+                       value="Calculate">
+                <input type="button" id="clear_form"
+                       value="Clear form">
+            </div>     
+        </form>
+        <div id="data"></div>
+    </main>
+    <script>
+        const $ = selector => document.querySelector(selector);
+ 
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            $("#join_list").addEventListener("click", evt => {
+                // get values user entered in textboxes
+                const angle1 = $("#angl1").value;
+                const angle2 = $("#angl2").value;
+                // calculate third angle
+                const angle3 = (180 - angle1 - angle2);
+            
+                // create an error message and set it to an empty string
+                let errorMessage = "";
+         
+                // check user entries – add to error message if invalid
+                if (angle1 == "") { 
+                    errorMessage += "First angle is required.\n";
+                }
+               
+                if (angle2 == "") {
+                    errorMessage += "Second angle is required.\n";
+                }
+            
+                // prevent form submission if there’s an error message
+                if (errorMessage != "") {         
+                    alert(errorMessage);
+                    evt.preventDefault();
+                } 
+                evt.preventDefault();
+
+                console.log(angle1);
+                
+                const html = `<p>The Missing angle is:${angle3}</p>`;
+                
+                document.getElementById("data").innerHTML = html;
+                document.getElementById("angle_form").reset();
+            });
+         
+            $("#clear_form").addEventListener("click", () => {
+                document.getElementById("angle_form").reset();
+            });
+            
+          
+        });
+        
+
+    </script>
+</body>
+</html>
